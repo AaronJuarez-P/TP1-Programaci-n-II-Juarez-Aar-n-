@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #ececec;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 40px;
+
+    background-color: #f1f1f1;
+
+    border-bottom: 1px solid #cfcfcf;
+
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+}
+
+/* ================= IZQUIERDA ================= */
+
+.izquierda{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* ================= BARRA DE BUSQUEDA ================= */
+
+.barraBusqueda{
+    display: flex;
+    align-items: center;
+
+    background-color: #dfdfdf;
+
+    padding: 9px 14px;
+
+    border-radius: 10px;
+
+    gap: 10px;
+
+    transition: 0.2s ease;
+}
+
+.barraBusqueda:hover{
+    background-color: #d0d0d0;
+}
+
+.barraBusqueda input{
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+
+    width: 220px;
+
+    color: #2b2b2b;
+}
+
+.barraBusqueda input::placeholder{
+    color: #5f5f5f;
+}
+
+/* ================= CATEGORIAS ================= */
+
+.categorias-ropa{
+    padding: 9px 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #c4c4c4;
+
+    background-color: #dfdfdf;
+
+    font-size: 14px;
+
+    color: #2b2b2b;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.categorias-ropa:hover{
+    background-color: #d0d0d0;
+}
+
+/* ================= NOMBRE ================= */
+
+#nombre{
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 32px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    color: #2c2c2c;
+}
+
+/* ================= DERECHA ================= */
+
+.derecha{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* ================= BOTONES ================= */
+
+button{
+    padding: 9px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #dfdfdf;
+
+    color: #2b2b2b;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+button:hover{
+    background-color: #9c9999;
+}
+
+/* ================= ICONOS ================= */
+
+i{
+    font-size: 15px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 1100px){
+
+    header{
+        flex-direction: column;
+        gap: 20px;
+        padding: 25px;
+    }
+
+    #nombre{
+        position: static;
+        transform: none;
+    }
+
+    .izquierda,
+    .derecha{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}

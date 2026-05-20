@@ -2,20 +2,19 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="../CSS/main.css">
         <meta charset="utf-8" lang="es">
         <title>Lana&Lino</title>
     </head>
 
     <body>
         <header>
-            <p>Lana&Lino</p>
-            <button type="button"><i class="fa-solid fa-bookmark"></i></button>
-            <button type="button"><i class="fa-solid fa-cart-shopping"></i></button>
+            <div class="izquierda">
             <div class="barraBusqueda">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" name="busqueda" placeholder="Buscar...">
             </div>
-            <select name="categorias">
+            <select name="categorias" class="categorias-ropa">
                 <option value="" selected disabled>Categorias</option>
                 <option value="remeras">Remeras</option>
                 <option value="buzos">Buzos</option>
@@ -25,7 +24,11 @@
                 <option value="zapatillas">Zapatillas</option>
                 <option value="ropa-interior">Ropa interior</option>
             </select>
-            <div>
+            <button type="button"><i class="fa-solid fa-bookmark"></i></button>
+            </div>
+            <p id="nombre">Lana&Lino</p>
+            <div class="derecha">
+                <button type="button"><i class="fa-solid fa-cart-shopping"></i></button>
                 <button type="button">Inicio sesion</button>
                 <button type="button">Cerrar sesion</button>
                 <button type="button"><i class="fa-solid fa-user"></i> Perfil</button>
