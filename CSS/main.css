@@ -17,6 +17,11 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    width: 100%;
 
     padding: 18px 40px;
 
@@ -274,4 +279,11 @@ footer a:hover{
         align-items: center;
     }
 
+}
+
+/* ================= CARDS ================= */
+
+.contenedor-productos {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
 }
