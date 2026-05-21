@@ -8,7 +8,10 @@
 
 body{
     font-family: 'Poppins', sans-serif;
-    background-color: #ececec;
+    background-color: #eef2f5;
+
+    /* ESPACIO PARA EL HEADER FIJO */
+    padding-top: 95px;
 }
 
 /* ================= HEADER ================= */
@@ -17,6 +20,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     position: fixed;
 
     top: 0;
@@ -25,11 +29,13 @@ header{
 
     padding: 18px 40px;
 
-    background-color: #f1f1f1;
+    background-color: #dfe8ee;
 
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid #c7d2da;
 
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.08);
+
+    z-index: 1000;
 }
 
 /* ================= IZQUIERDA ================= */
@@ -46,7 +52,7 @@ header{
     display: flex;
     align-items: center;
 
-    background-color: #dfdfdf;
+    background-color: #cfdde6;
 
     padding: 9px 14px;
 
@@ -58,7 +64,7 @@ header{
 }
 
 .barraBusqueda:hover{
-    background-color: #d0d0d0;
+    background-color: #bdd0db;
 }
 
 .barraBusqueda input{
@@ -71,11 +77,11 @@ header{
 
     width: 220px;
 
-    color: #2b2b2b;
+    color: #2c3338;
 }
 
 .barraBusqueda input::placeholder{
-    color: #5f5f5f;
+    color: #6a767d;
 }
 
 /* ================= CATEGORIAS ================= */
@@ -85,13 +91,13 @@ header{
 
     border-radius: 8px;
 
-    border: 1px solid #c4c4c4;
+    border: 1px solid #b8c7d0;
 
-    background-color: #dfdfdf;
+    background-color: #cfdde6;
 
     font-size: 14px;
 
-    color: #2b2b2b;
+    color: #2c3338;
 
     cursor: pointer;
 
@@ -99,7 +105,7 @@ header{
 }
 
 .categorias-ropa:hover{
-    background-color: #d0d0d0;
+    background-color: #bdd0db;
 }
 
 /* ================= NOMBRE ================= */
@@ -117,7 +123,7 @@ header{
 
     letter-spacing: 1px;
 
-    color: #2c2c2c;
+    color: #2c3338;
 }
 
 /* ================= DERECHA ================= */
@@ -137,9 +143,9 @@ button{
 
     border-radius: 8px;
 
-    background-color: #dfdfdf;
+    background-color: #cfdde6;
 
-    color: #2b2b2b;
+    color: #2c3338;
 
     font-size: 14px;
 
@@ -151,18 +157,26 @@ button{
 }
 
 button:hover{
-    background-color: #9c9999;
+    background-color: #4b5b66;
+
+    color: #ffffff;
 }
 
 /* ================= ICONOS ================= */
 
 i{
     font-size: 15px;
+
+    color: #2c3338;
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media(max-width: 1100px){
+
+    body{
+        padding-top: 180px;
+    }
 
     header{
         flex-direction: column;
@@ -196,13 +210,13 @@ footer{
     padding: 22px 35px;
     margin-top: 40px;
 
-    background-color: #f1f1f1;
+    background-color: #ccdbe4;
 
-    border-top: 1px solid #cfcfcf;
+    border-top: 2px solid #c7d2da;
 
-    box-shadow: 0px -2px 8px rgba(0,0,0,0.05);
+    box-shadow: 5px 8px 8px rgba(0,0,0,0.05);
 
-    color: #2b2b2b;
+    color: #2c3338;
 }
 
 /* ================= SECCIONES ================= */
@@ -221,6 +235,8 @@ footer{
     font-weight: 600;
 
     margin-bottom: 3px;
+
+    color: #2c3338;
 }
 
 /* ================= TEXTOS ================= */
@@ -228,7 +244,7 @@ footer{
 footer p{
     font-size: 13px;
 
-    color: #4d4d4d;
+    color: #5f6c74;
 }
 
 /* ================= LINKS ================= */
@@ -236,7 +252,7 @@ footer p{
 footer a{
     text-decoration: none;
 
-    color: #2b2b2b;
+    color: #2c3338;
 
     font-size: 13px;
 
@@ -244,7 +260,7 @@ footer a{
 }
 
 footer a:hover{
-    color: #8a8a8a;
+    color: #5a7485;
 }
 
 /* ================= COPYRIGHT ================= */
@@ -257,11 +273,11 @@ footer a:hover{
     padding-top: 12px;
     margin-top: 5px;
 
-    border-top: 1px solid #d6d6d6;
+    border-top: 1px solid #cfd8de;
 
     font-size: 12px;
 
-    color: #666;
+    color: #6b757b;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -286,4 +302,76 @@ footer a:hover{
 .contenedor-productos {
     display: grid;
     grid-template-columns: auto auto auto auto;
+
+    gap: 25px;
+
+    padding: 30px;
+}
+
+/* CARD INDIVIDUAL */
+
+.card-producto{
+    background-color: #dfe8ee;
+
+    border: 1px solid #c7d2da;
+
+    border-radius: 18px;
+
+    padding: 18px;
+
+    text-align: center;
+
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.06);
+
+    transition: 0.25s ease;
+}
+
+/* EFECTO HOVER */
+
+.card-producto:hover{
+    transform: translateY(-5px);
+
+    background-color: #d3e0e8;
+
+    box-shadow: 0px 8px 18px rgba(0,0,0,0.10);
+}
+
+/* IMAGEN */
+
+.card-producto img{
+    width: 100%;
+
+    border-radius: 14px;
+
+    margin-bottom: 12px;
+}
+
+/* TITULO */
+
+.card-producto h4{
+    font-size: 17px;
+
+    color: #2c3338;
+
+    margin-bottom: 8px;
+}
+
+/* TEXTO */
+
+.card-producto p{
+    color: #5f6c74;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+}
+
+/* PRECIO */
+
+.card-producto span{
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #2c3338;
 }
