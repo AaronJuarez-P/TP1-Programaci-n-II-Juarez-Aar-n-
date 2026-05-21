@@ -177,3 +177,101 @@ i{
     }
 
 }
+
+/* ================= FOOTER ================= */
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    padding: 22px 35px;
+    margin-top: 40px;
+
+    background-color: #f1f1f1;
+
+    border-top: 1px solid #cfcfcf;
+
+    box-shadow: 0px -2px 8px rgba(0,0,0,0.05);
+
+    color: #2b2b2b;
+}
+
+/* ================= SECCIONES ================= */
+
+.footer-seccion{
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    min-width: 160px;
+}
+
+.footer-seccion h3{
+    font-size: 15px;
+    font-weight: 600;
+
+    margin-bottom: 3px;
+}
+
+/* ================= TEXTOS ================= */
+
+footer p{
+    font-size: 13px;
+
+    color: #4d4d4d;
+}
+
+/* ================= LINKS ================= */
+
+footer a{
+    text-decoration: none;
+
+    color: #2b2b2b;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+footer a:hover{
+    color: #8a8a8a;
+}
+
+/* ================= COPYRIGHT ================= */
+
+.footer-copy{
+    width: 100%;
+
+    text-align: center;
+
+    padding-top: 12px;
+    margin-top: 5px;
+
+    border-top: 1px solid #d6d6d6;
+
+    font-size: 12px;
+
+    color: #666;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 900px){
+
+    footer{
+        flex-direction: column;
+        align-items: center;
+
+        text-align: center;
+    }
+
+    .footer-seccion{
+        align-items: center;
+    }
+
+}
