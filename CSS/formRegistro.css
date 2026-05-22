@@ -23,7 +23,7 @@ body{
 
 header{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     position: fixed;
@@ -44,86 +44,9 @@ header{
     z-index: 1000;
 }
 
-/* ================= IZQUIERDA ================= */
-
-.izquierda{
-    display: flex;
-    align-items: center;
-
-    gap: 18px;
-}
-
-/* ================= BARRA DE BUSQUEDA ================= */
-
-.barraBusqueda{
-    display: flex;
-    align-items: center;
-
-    background-color: #bccbd4;
-
-    padding: 9px 14px;
-
-    border-radius: 10px;
-
-    gap: 10px;
-
-    transition: 0.2s ease;
-}
-
-.barraBusqueda:hover{
-    background-color: #aebfc9;
-}
-
-.barraBusqueda input{
-    border: none;
-    outline: none;
-
-    background: transparent;
-
-    font-size: 14px;
-
-    width: 220px;
-
-    color: #2c3338;
-}
-
-.barraBusqueda input::placeholder{
-    color: #5e6a71;
-}
-
-/* ================= CATEGORIAS ================= */
-
-.categorias-ropa{
-    padding: 9px 12px;
-
-    border-radius: 8px;
-
-    border: 1px solid #aebdc6;
-
-    background-color: #bccbd4;
-
-    font-size: 14px;
-
-    color: #2c3338;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-.categorias-ropa:hover{
-    background-color: #aebfc9;
-}
-
 /* ================= NOMBRE ================= */
 
 #nombre{
-    position: absolute;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
     font-size: 32px;
 
     font-weight: 600;
@@ -131,15 +54,6 @@ header{
     letter-spacing: 1px;
 
     color: #2c3338;
-}
-
-/* ================= DERECHA ================= */
-
-.derecha{
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
 }
 
 /* ================= BOTONES ================= */
@@ -180,10 +94,10 @@ i{
     color: #2c3338;
 }
 
-/* ================= LOGIN FORM ================= */
+/* ================= REGISTRO FORM ================= */
 
-.inicio-formulario{
-    width: 420px;
+.registro-formulario{
+    width: 470px;
 
     margin: 110px auto;
 
@@ -201,9 +115,9 @@ i{
     gap: 20px;
 }
 
-/* ================= INPUTS LOGIN ================= */
+/* ================= INPUTS REGISTRO ================= */
 
-.inicio-formulario input{
+.registro-formulario input{
     padding: 16px 16px;
 
     border: 1px solid #aebdc6;
@@ -221,7 +135,7 @@ i{
     transition: 0.2s ease;
 }
 
-.inicio-formulario input:focus{
+.registro-formulario input:focus{
     border-color: #4b5b66;
 
     background-color: #eef2f5;
@@ -286,34 +200,10 @@ i{
     color: #2c3338;
 }
 
-/* ================= BOTÓN PRINCIPAL LOGIN ================= */
+/* ================= BOTÓN REGISTRARSE ================= */
 
-.inicio-formulario button[type="submit"]{
-    margin-top: 0px;
-
-    padding: 14px;
-
-    border-radius: 14px;
-
-    background-color: #4b5b66;
-
-    color: #ffffff;
-
-    font-size: 15px;
-
-    font-weight: 500;
-
-    transition: 0.2s ease;
-}
-
-.inicio-formulario button[type="submit"]:hover{
-    background-color: #2c3338;
-}
-
-/* ================= BOTÓN REGISTRO ================= */
-
-#btn-registro-inicio{
-    margin-top: 0px;
+.registro-formulario button[type="submit"]{
+    margin-top: 5px;
 
     padding: 14px;
 
@@ -332,8 +222,34 @@ i{
     width: 100%;
 }
 
-#btn-registro-inicio:hover{
+.registro-formulario button[type="submit"]:hover{
     background-color: #2c3338;
+}
+
+/* ================= BOTÓN INICIAR SESION ================= */
+
+.registro-formulario > button[type="button"]{
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background-color: #bccbd4;
+
+    color: #2c3338;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+
+    width: 100%;
+}
+
+.registro-formulario > button[type="button"]:hover{
+    background-color: #4b5b66;
+
+    color: #ffffff;
 }
 
 /* ================= FOOTER ================= */
@@ -384,51 +300,20 @@ footer a:hover{
     color: #4f6675;
 }
 
-/* ================= COPYRIGHT ================= */
-
-.footer-copy{
-    width: 100%;
-
-    text-align: center;
-
-    padding-top: 12px;
-
-    margin-top: 5px;
-
-    border-top: 1px solid #aebdc6;
-
-    font-size: 12px;
-
-    color: #5f6a70;
-}
-
 /* ================= RESPONSIVE HEADER ================= */
 
 @media(max-width: 1100px){
 
     body{
-        padding-top: 180px;
+        padding-top: 160px;
     }
 
     header{
-        flex-direction: column;
-
-        gap: 20px;
-
         padding: 25px;
     }
 
     #nombre{
-        position: static;
-
-        transform: none;
-    }
-
-    .izquierda,
-    .derecha{
-        flex-wrap: wrap;
-
-        justify-content: center;
+        text-align: center;
     }
 }
 
@@ -445,12 +330,6 @@ footer a:hover{
 
         text-align: center;
     }
-
-    /* ================= CARDS ================= */
-
-    .contenedor-productos{
-        grid-template-columns: auto auto;
-    }
 }
 
 /* ================= RESPONSIVE MOVIL ================= */
@@ -460,15 +339,13 @@ footer a:hover{
     /* ================= BODY ================= */
 
     body{
-        padding-top: 210px;
+        padding-top: 140px;
     }
 
     /* ================= HEADER ================= */
 
     header{
         padding: 20px 15px;
-
-        gap: 15px;
     }
 
     /* ================= NOMBRE ================= */
@@ -479,34 +356,9 @@ footer a:hover{
         text-align: center;
     }
 
-    /* ================= IZQUIERDA/DERECHA ================= */
+    /* ================= FORM ================= */
 
-    .izquierda,
-    .derecha{
-        width: 100%;
-
-        justify-content: center;
-    }
-
-    /* ================= BARRA BUSQUEDA ================= */
-
-    .barraBusqueda{
-        width: 100%;
-    }
-
-    .barraBusqueda input{
-        width: 100%;
-    }
-
-    /* ================= CATEGORIAS ================= */
-
-    .categorias-ropa{
-        width: 100%;
-    }
-
-    /* ================= FORM LOGIN ================= */
-
-    .inicio-formulario{
+    .registro-formulario{
         width: 92%;
 
         padding: 35px 22px;
@@ -516,14 +368,14 @@ footer a:hover{
 
     /* ================= INPUTS ================= */
 
-    .inicio-formulario input{
+    .registro-formulario input{
         font-size: 15px;
     }
 
     /* ================= BOTONES ================= */
 
-    .inicio-formulario button[type="submit"],
-    #btn-registro-inicio{
+    .registro-formulario button[type="submit"],
+    .registro-formulario > button[type="button"]{
         width: 100%;
     }
 
@@ -533,107 +385,10 @@ footer a:hover{
         padding: 25px 20px;
     }
 
-    /* ================= CARDS ================= */
+    /* ================= FOOTER TEXTOS ================= */
 
-    .contenedor-productos{
-        grid-template-columns: auto;
-
-        padding: 20px;
-    }
-
-    .card-producto{
-        width: 100%;
-    }
-
-    /* ================= TEXTOS CARDS ================= */
-
-    .card-producto h4{
-        font-size: 16px;
-    }
-
-    .card-producto p{
+    footer p,
+    footer a{
         font-size: 13px;
     }
-
-    .card-producto span{
-        font-size: 17px;
-    }
-}
-
-/* ================= CARDS ================= */
-
-.contenedor-productos{
-    display: grid;
-
-    grid-template-columns: auto auto auto auto;
-
-    gap: 25px;
-
-    padding: 30px;
-}
-
-.card-producto{
-    background-color: #cfd9e0;
-
-    border: 1px solid #b4c1ca;
-
-    border-radius: 18px;
-
-    padding: 18px;
-
-    text-align: center;
-
-    box-shadow: 0px 6px 16px rgba(0,0,0,0.10);
-
-    transition: 0.25s ease;
-}
-
-/* ================= EFECTO HOVER ================= */
-
-.card-producto:hover{
-    transform: translateY(-5px);
-
-    background-color: #bccbd4;
-
-    box-shadow: 0px 12px 24px rgba(0,0,0,0.16);
-}
-
-/* ================= IMAGEN ================= */
-
-.card-producto img{
-    width: 100%;
-
-    border-radius: 14px;
-
-    margin-bottom: 12px;
-}
-
-/* ================= TITULO ================= */
-
-.card-producto h4{
-    font-size: 17px;
-
-    color: #2c3338;
-
-    margin-bottom: 8px;
-}
-
-/* ================= TEXTO ================= */
-
-.card-producto p{
-    color: #556168;
-
-    font-size: 14px;
-
-    margin-bottom: 10px;
-}
-
-/* ================= PRECIO ================= */
-
-.card-producto span{
-    font-size: 18px;
-
-    font-weight: 600;
-
-    color: #2c3338;
 }
