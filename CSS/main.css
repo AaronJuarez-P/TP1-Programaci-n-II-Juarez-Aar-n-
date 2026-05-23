@@ -669,3 +669,46 @@ footer a:hover{
 
     color: #2c3338;
 }
+
+.registro-formulario label{
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.registro-formulario input{
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: 1px solid #bfc9d1;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+.boton-lapiz{
+    position: absolute;
+    right: 12px;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    color: #6c7a89;
+    font-size: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-lapiz:hover{
+    color: #3b82f6;
+}
+
+.registro-formulario input:focus{
+    border-color: #3b82f6;
+}
