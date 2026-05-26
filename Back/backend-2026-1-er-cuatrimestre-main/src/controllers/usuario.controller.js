@@ -68,7 +68,7 @@ const modificarUsuario = async (req, res) => {
 }
 
 const crearUsuario = async (req, res) => {
-    try{
+    try {
         const {
             nombre,
             apellido,
@@ -77,7 +77,7 @@ const crearUsuario = async (req, res) => {
             telefono,
             rol,
             password
-        } = req.body
+        } = req.body;
 
         const usuario = {
             nombre,
@@ -87,19 +87,49 @@ const crearUsuario = async (req, res) => {
             email,
             telefono,
             rol,
-        }
+        };
 
         const connection = await getConnection();
-        const response = await connection.query("INSERT INTO usuario set ?",usuario)
-        if(response && response.affectedRows > 0){
-            res.json ({codigo: 200, mensaje: "Usuario registrado exitosamente", payload: [{id_usuario: response.insertId}]});
+
+        // 1. Verificar si el email ya existe
+        const verificarUsuario = await connection.query(
+            "SELECT * FROM usuario WHERE email = ?",
+            [email]
+        );
+
+        console.log("Resultado de la búsqueda:", verificarUsuario);
+
+        // AQUÍ ESTÁ LA CORRECCIÓN: Validamos si el array tiene elementos
+        if (verificarUsuario && verificarUsuario.length > 0) {
+            return res.json({
+                codigo: -1,
+                mensaje: "El email ya está registrado",
+                payload: []
+            });
         }
-        else{
-            res.json({codigo: -1, mensaje: "Error registrando usuario", payload: []});
+
+        // 2. Registrar usuario si el email no existía
+        const response = await connection.query(
+            "INSERT INTO usuario SET ?",
+            usuario
+        );
+
+        if (response && response.affectedRows > 0) {
+            res.json({
+                codigo: 200,
+                mensaje: "Usuario registrado exitosamente",
+                payload: [{ id_usuario: response.insertId }]
+            });
+        } else {
+            res.json({
+                codigo: -1,
+                mensaje: "Error registrando usuario en la base de datos",
+                payload: []
+            });
         }
-        
-    }
-    catch(error){
+
+    } catch (error) {
+        console.error("Error en crearUsuario:", error);
         res.status(500);
         res.send(error.message);
     }

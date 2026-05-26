@@ -1,4 +1,5 @@
 const form = document.getElementById("formRegistro");
+const btnInicioRegistro = document.getElementById("btnInicioRegistro");
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -11,17 +12,16 @@ form.addEventListener("submit", async (e) => {
     const password = document.querySelector('input[name="contraseña"]').value;
 
     const usuario = {
-    nombre,
-    apellido,
-    direccion,
-    telefono,
-    email,
-    password,
-    rol: "cliente"
-};
+        nombre,
+        apellido,
+        direccion,
+        telefono,
+        email,
+        password,
+        rol: "cliente"
+    };
 
     try {
-
         const response = await fetch("http://localhost:4000/api/registrarUsuario", {
             method: "POST",
             headers: {
@@ -31,16 +31,23 @@ form.addEventListener("submit", async (e) => {
         });
 
         const data = await response.json();
-
         console.log(data);
 
-        alert("Usuario registrado correctamente");
+        if (data.codigo === 200) {
+            alert("Usuario registrado correctamente");
+            // Redirección directa usando solo el nombre del archivo
+            window.location.href = "main.html"; 
+        } else {
+            alert("Este usuario ya esta registrado");
+        }
 
-    } catch(error) {
-
+    } catch (error) {
         console.error(error);
-
         alert("Error al registrar usuario");
-
     }
+});
+
+// Botón para ir al Login desde la pantalla de registro
+btnInicioRegistro.addEventListener("click", () => {
+    window.location.href = "inicio.html";
 });
