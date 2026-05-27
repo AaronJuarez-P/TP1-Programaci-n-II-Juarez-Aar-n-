@@ -1,5 +1,5 @@
-import { getConnection } from "./../database/database";
-const jwt = require ("jsonwebtoken");
+import { getConnection } from "./../database/database.js";
+import jwt from "jsonwebtoken"; // <-- ASÍ TIENE QUE QUEDAR
 const secret = process.env.SECRET
 //crear usuario
 const login = async (req, res) => {

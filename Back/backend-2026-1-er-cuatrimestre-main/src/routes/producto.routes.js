@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { methods as productoController} from "./../controllers/producto.controller";
+import { methods as productoController} from "./../controllers/producto.controller.js";
 const router = Router();
 
 // import { verificarToken } from "./../middlewares/auth.middleware.js";
@@ -8,7 +8,7 @@ router.get("/obtenerProductos", productoController.obtenerProductos)
 router.post("/crearCategoria", productoController.crearCategoria)
 router.post("/cargarProducto", productoController.cargarProducto)
 router.get("/obtenerCategorias",productoController.obtenerCategorias)
-router.get("/obtenerDatosProducto/:id",productoController.obtenerDatosProducto)
+router.get("/obtenerDatosProducto/:id", productoController.obtenerDatosProducto)
 router.put("/modificarStock",productoController.modificarStock)
 router.post("/crearInventario",productoController.crearInventario)
 router.post("/agregarFavorito",productoController.agregarFavorito)

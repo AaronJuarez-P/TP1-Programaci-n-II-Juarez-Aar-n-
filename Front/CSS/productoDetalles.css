@@ -1,0 +1,209 @@
+/* ================= DETALLE DE PRODUCTO ESTRUCTURA ================= */
+
+.detalle-producto-seccion {
+    display: flex;
+    max-width: 1150px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #cfd9e0; /* El color de tus tarjetas */
+    border: 1px solid #b4c1ca;
+    border-radius: 20px;       /* El redondeado de tus formularios */
+    box-shadow: 0px 16px 38px rgba(0,0,0,0.12);
+    gap: 45px;
+}
+
+/* Columna Izquierda */
+.detalle-bloque-imagen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c7d3db;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.detalle-bloque-imagen img {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
+}
+
+/* Columna Derecha */
+.detalle-bloque-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.detalle-bloque-info h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2c3338;
+}
+
+.detalle-bloque-info p {
+    font-size: 14px;
+    color: #556168;
+    line-height: 1.6;
+}
+
+/* Bloque Informativo de Stock */
+.detalle-stock-aviso {
+    background-color: #bccbd4;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    color: #2c3338;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detalle-stock-aviso strong {
+    font-weight: 600;
+    color: #4b5b66;
+}
+
+/* Estructura Interna de Selectores */
+.detalle-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detalle-subtitulo {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #5e6a71;
+}
+
+.detalle-lista-botones, 
+.detalle-lista-cuotas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Sobrescribir botones específicos de Talle para diferenciarlos del estilo general */
+.btn-talle {
+    min-width: 50px;
+    height: 42px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    background-color: #bccbd4;
+    color: #2c3338;
+    transition: 0.2s ease;
+}
+
+.btn-talle:hover:not(:disabled) {
+    background-color: #4b5b66;
+    color: #ffffff;
+}
+
+.btn-talle.seleccionado {
+    background-color: #2c3338;
+    color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
+
+.btn-talle:disabled {
+    opacity: 0.4;
+    background-color: #aebdc6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Botones de cuotas */
+.btn-cuota-opcion {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    background-color: #bccbd4;
+    color: #2c3338;
+}
+
+.btn-cuota-opcion.activo {
+    background-color: #4b5b66;
+    color: #ffffff;
+}
+
+/* Precios */
+.detalle-tarjeta-precio {
+    background-color: #dde5ea;
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid #bfc9d1;
+    margin-top: 5px;
+}
+
+.monto-principal {
+    font-size: 30px;
+    font-weight: 600;
+    color: #2c3338;
+}
+
+.monto-subdesglose {
+    font-size: 14px;
+    color: #5e6a71;
+    margin-top: 4px;
+}
+
+/* Botón Añadir al Carrito */
+.btn-principal-carrito {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 14px;
+    background-color: #4b5b66;
+    color: #ffffff;
+    margin-top: auto; /* Lo empuja siempre al fondo de la columna */
+    box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+}
+
+.btn-principal-carrito:hover:not(:disabled) {
+    background-color: #2c3338;
+}
+
+.btn-principal-carrito:disabled {
+    background-color: #bccbd4;
+    color: #7a8a94;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.btn-principal-carrito i {
+    color: inherit; /* Hereda el color blanco o gris del texto del botón */
+    margin-right: 6px;
+}
+
+/* ================= RESPONSIVE DETALLE ================= */
+
+@media(max-width: 850px){
+    .detalle-producto-seccion {
+        flex-direction: column;
+        margin: 20px 15px;
+        padding: 20px;
+    }
+    .detalle-bloque-imagen img {
+        max-height: 350px;
+    }
+}
+
+.detalle-bloque-imagen img {
+    width: 100%;             /* 👈 Fuerza a la imagen a ocupar todo el ancho disponible */
+    height: 100%;            /* 👈 Fuerza a la imagen a ocupar todo el alto disponible */
+    max-height: 500px;       /* Mantiene el límite máximo que ya tenías */
+    object-fit: cover;       /* 👈 Hace que llene el recuadro elegantemente sin deformarse */
+    border-radius: 12px;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
+}

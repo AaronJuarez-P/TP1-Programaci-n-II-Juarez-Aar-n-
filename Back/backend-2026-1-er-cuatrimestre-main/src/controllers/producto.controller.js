@@ -1,6 +1,6 @@
-import { getConnection } from "./../database/database";
+import { getConnection } from "./../database/database.js"; // <-- CON EL .JS AL FINAL
 const secret = process.env.secret;
-const jwt = require ("jsonwebtoken");
+import jwt from "jsonwebtoken"; // <-- CONVERTIDO A IMPORT PARA EVITAR MÁS ERRORES
 
 const QUERY = "select p.id_producto as idProducto, p.nombre as producto, p.descripcion as descripcion, p.precio as precio, p.genero as genero, p.imagen as ulrImagen, c.id_categoria as idCategoria, c.nombre as categoria from producto p join categoria c on p.id_categoria = c.id_categoria;";
 

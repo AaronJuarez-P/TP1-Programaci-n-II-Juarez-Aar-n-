@@ -1,22 +1,20 @@
-import app from "./app";
-const jwt = require("jsonwebtoken");
-const {methods} = require("./controllers/producto.controller");
+import app from "./app.js";
+import jwt from "jsonwebtoken"; // Convertido a ES Module
+import { methods } from "./controllers/producto.controller.js"; // Agregado .js y convertido a import
 
 const main = () => {
-    app.listen(app.get("port"));
-    console.log(`Server on port ${app.get("port")}`);
+    app.listen(app.get("port"), () => {
+        console.log(`🚀 Servidor corriendo con éxito en el puerto ${app.get("port")}`);
+    });
 };
-
 
 main();
 
-
+// Esto ejecuta tu función apenas arranca el backend para verificar que la BD responda
 methods.fetchProductos()
     .then(products => {
-        console.log('Products:', products);
-        //process.exit(0);
+        console.log('✅ Conexión con Base de Datos exitosa. Productos cargados:', products.length);
     })
     .catch(error => {
-        console.error('Error fetching products:', error);
-        process.exit(1);
+        console.error('❌ Error al intentar traer productos de la BD:', error);
     });

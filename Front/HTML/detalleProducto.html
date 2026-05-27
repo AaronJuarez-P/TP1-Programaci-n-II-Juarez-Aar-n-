@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="../CSS/formRegistro.css">
+        <link rel="stylesheet" href="../CSS/productoDetalles.css">
+        <title>Lana&Lino - Detalle de Producto</title>
+    </head>
+    <body>
+
+        <main class="detalle-producto-seccion">
+            
+            <div class="detalle-bloque-imagen">
+                <img id="producto-imagen" src="" alt="Cargando producto...">
+            </div>
+
+            <div class="detalle-bloque-info">
+                <h1 id="producto-nombre">Cargando Nombre...</h1>
+                <p id="producto-descripcion">Cargando Descripción...</p>
+                
+                <div id="producto-stock" class="detalle-stock-aviso">
+                    <i class="fa-solid fa-circle-info"></i> Selecciona un talle para conocer el stock disponible.
+                </div>
+
+                <div class="detalle-grupo">
+                    <span class="detalle-subtitulo">Talles Disponibles</span>
+                    <div id="contenedor-talles" class="detalle-lista-botones">
+                        </div>
+                </div>
+
+                <div class="detalle-grupo">
+                    <span class="detalle-subtitulo">Opciones de Financiación</span>
+                    <input type="hidden" id="precio-base" value="0">
+                    
+                    <div class="detalle-lista-cuotas">
+                        <button type="button" class="btn-cuota-opcion activo" onclick="seleccionarCuota(this, 1, 0)">Contado</button>
+                        <button type="button" class="btn-cuota-opcion" onclick="seleccionarCuota(this, 3, 0.05)">3 Cuotas (+5%)</button>
+                        <button type="button" class="btn-cuota-opcion" onclick="seleccionarCuota(this, 6, 0.10)">6 Cuotas (+10%)</button>
+                        <button type="button" class="btn-cuota-opcion" onclick="seleccionarCuota(this, 9, 0.15)">9 Cuotas (+15%)</button>
+                        <button type="button" class="btn-cuota-opcion" onclick="seleccionarCuota(this, 12, 0.20)">12 Cuotas (+20%)</button>
+                    </div>
+                </div>
+
+                <div class="detalle-tarjeta-precio">
+                    <div id="precio-final" class="monto-principal">ARS$ 0,00</div>
+                    <div id="precio-por-cuota" class="monto-subdesglose">Selecciona un método de pago</div>
+                </div>
+
+                <button type="button" id="btn-agregar-carrito" class="btn-principal-carrito" disabled>
+                    <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+                </button>
+            </div>
+
+        </main>
+
+        <script src="../JS/detalleProducto.js"></script>
+    </body>
+</html>

@@ -1,6 +1,6 @@
-import { getConnection } from "./../database/database";
+import { getConnection } from "./../database/database.js"; // <-- CORREGIDO: Agregado .js al final
 const secret = process.env.secret;
-const jwt = require ("jsonwebtoken");
+import jwt from "jsonwebtoken"; // <-- CORREGIDO: Cambiado require por import
 
 const obtenerDatosUsuario = async (req, res) => {
     try{
@@ -99,7 +99,6 @@ const crearUsuario = async (req, res) => {
 
         console.log("Resultado de la búsqueda:", verificarUsuario);
 
-        // AQUÍ ESTÁ LA CORRECCIÓN: Validamos si el array tiene elementos
         if (verificarUsuario && verificarUsuario.length > 0) {
             return res.json({
                 codigo: -1,
@@ -135,8 +134,6 @@ const crearUsuario = async (req, res) => {
     }
 }
 
-
-
 function verificarToken(req){
     const token = req.headers.authorization;
     if(!token){
@@ -152,11 +149,10 @@ function verificarToken(req){
     catch(error){
         return {estado: false, error: "Token inválido"}
     }  
-
 }
 
 export const methods = {
     obtenerDatosUsuario,
     crearUsuario,
     modificarUsuario
-}
+};

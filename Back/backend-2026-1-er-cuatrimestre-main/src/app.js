@@ -3,9 +3,9 @@ import morgan from "morgan";
 import cors from "cors";
 import path from "path"; // <-- 1. IMPORTA EL MÓDULO PATH AQUÍ
 
-import usuarioRoutes from "./routes/usuario.routes";
-import loginRoutes from "./routes/login.routes";
-import productoRoutes from "./routes/producto.routes";
+import usuarioRoutes from "./routes/usuario.routes.js";
+import loginRoutes from "./routes/login.routes.js";
+import productoRoutes from "./routes/producto.routes.js";
 
 const app = express();
 
