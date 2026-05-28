@@ -1,57 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const contenedor = document.querySelector(".contenedor-productos");
-    const selectCategoria = document.querySelector(".categorias-ropa"); // 👈 SOLO AGREGADO
+    const contenedor = document.querySelector("#lista-carrito");
+    const selectCategoria = document.querySelector(".categorias-ropa");
+    const carritoVacio = document.getElementById("carrito-vacio");
 
     const idUsuario = localStorage.getItem("idUsuario");
     const token = localStorage.getItem("token");
 
-    // 👇 SOLO AGREGADO (estado local para filtrar)
     let productosFavoritos = [];
 
     // ================= VALIDAR SESION =================
-
     if (!idUsuario || !token) {
 
-        contenedor.innerHTML = `
-            <p class="sin-favoritos">
-                Debes iniciar sesión para ver tus favoritos.
-            </p>
-        `;
+        contenedor.innerHTML = "";
+        carritoVacio.style.display = "flex";
 
         return;
     }
 
     // ================= OBTENER FAVORITOS =================
-
     fetch(`http://localhost:4000/api/obtenerFavoritos/${idUsuario}`, {
-
         headers: {
             "Authorization": token
         }
-
     })
 
     .then(response => response.json())
 
     .then(data => {
 
-        // ================= SIN FAVORITOS =================
+        // 🔥 IMPORTANTE: limpiar estado
+        productosFavoritos = [];
 
+        // ================= SIN FAVORITOS =================
         if (data.codigo !== 200 || !data.payload || data.payload.length === 0) {
 
-            contenedor.innerHTML = `
-                <p class="sin-favoritos">
-                    No tienes productos añadidos a tus favoritos.
-                </p>
-            `;
+            contenedor.innerHTML = "";
+            carritoVacio.style.display = "flex";
 
             return;
         }
 
+        // ================= CON FAVORITOS =================
         contenedor.innerHTML = "";
-
-        // ================= RECORRER FAVORITOS =================
+        carritoVacio.style.display = "none";
 
         data.payload.forEach(fav => {
 
@@ -65,29 +57,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const prod = prodData.payload[0];
 
-                    console.log(prod);
-
-                    // 👇 SOLO AGREGADO (guardar en array para filtrar)
                     productosFavoritos.push({
                         ...prod,
                         idProducto: fav.idProducto
                     });
 
-                    // ================= CREAR TARJETA =================
-
                     const tarjeta = document.createElement("div");
-
                     tarjeta.className = "card-producto";
 
                     tarjeta.innerHTML = `
-
-                        <img 
-                            src="${prod.urlImagen || prod.ulrImagen}" 
-                            alt="${prod.producto}"
-                        >
+                        <img src="${prod.urlImagen || prod.ulrImagen}" alt="${prod.producto}">
 
                         <div class="info-producto">
-
                             <h4>${prod.producto}</h4>
 
                             <p class="precio-producto">
@@ -97,72 +78,54 @@ document.addEventListener("DOMContentLoaded", () => {
                                 })}
                             </p>
 
-                            <a 
-                                href="detalleProducto.html?id=${fav.idProducto}" 
-                                class="btn-ver-producto"
-                            >
+                            <a href="detalleProducto.html?id=${fav.idProducto}" class="btn-ver-producto">
                                 Ver producto
                             </a>
-
                         </div>
 
-                        <button 
-                            type="button" 
-                            class="btn-quitar-fav" 
-                            data-id="${fav.idProducto}"
-                        >
+                        <button type="button" class="btn-quitar-fav" data-id="${fav.idProducto}">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     `;
 
-                    // ================= ELIMINAR FAVORITO =================
-
+                    // ================= ELIMINAR =================
                     tarjeta.querySelector(".btn-quitar-fav")
                     .addEventListener("click", (e) => {
 
                         const idEliminar = e.currentTarget.getAttribute("data-id");
 
                         fetch("http://localhost:4000/api/eliminarFavorito", {
-
                             method: "DELETE",
-
                             headers: {
                                 "Content-Type": "application/json",
                                 "Authorization": token
                             },
-
                             body: JSON.stringify({
                                 id_usuario: idUsuario,
                                 id_producto: idEliminar
                             })
-
                         })
-
-                        .then(resDelete => resDelete.json())
-
+                        .then(res => res.json())
                         .then(dataDelete => {
 
                             if (dataDelete.codigo === 200) {
 
                                 tarjeta.remove();
 
-                                // ================= SI YA NO HAY FAVORITOS =================
+                                productosFavoritos = productosFavoritos.filter(
+                                    p => p.idProducto != idEliminar
+                                );
 
+                                // ================= SI NO QUEDAN FAVORITOS =================
                                 if (contenedor.children.length === 0) {
 
-                                    contenedor.innerHTML = `
-                                        <p class="sin-favoritos">
-                                            No tienes productos añadidos a tus favoritos.
-                                        </p>
-                                    `;
+                                    contenedor.innerHTML = "";
+                                    carritoVacio.style.display = "flex";
                                 }
                             }
                         })
-
                         .catch(err => console.error(err));
                     });
-
-                    // ================= AGREGAR TARJETA =================
 
                     contenedor.appendChild(tarjeta);
                 }
@@ -178,16 +141,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.error(error);
 
-        contenedor.innerHTML = `
-            <p class="sin-favoritos">
-                Error al cargar los favoritos.
-            </p>
-        `;
+        contenedor.innerHTML = "";
+        carritoVacio.style.display = "flex";
     });
 
-    // ================= FILTRO POR CATEGORIAS (NUEVO, NO ROMPE NADA) =================
-
+    // ================= FILTRO =================
     if (selectCategoria) {
+
         selectCategoria.addEventListener("change", (e) => {
 
             const categoria = e.target.value;
@@ -197,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const filtrados = categoria === "productos" || categoria === ""
                 ? productosFavoritos
                 : productosFavoritos.filter(p =>
-                    p.categoria?.toLowerCase() === categoria.toLowerCase()
+                    (p.categoria || "").toLowerCase() === categoria.toLowerCase()
                 );
 
             filtrados.forEach(prod => {
@@ -206,14 +166,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 tarjeta.className = "card-producto";
 
                 tarjeta.innerHTML = `
-
-                    <img 
-                        src="${prod.urlImagen || prod.ulrImagen}" 
-                        alt="${prod.producto}"
-                    >
+                    <img src="${prod.urlImagen || prod.ulrImagen}" alt="${prod.producto}">
 
                     <div class="info-producto">
-
                         <h4>${prod.producto}</h4>
 
                         <p class="precio-producto">
@@ -223,20 +178,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             })}
                         </p>
 
-                        <a 
-                            href="detalleProducto.html?id=${prod.idProducto}" 
-                            class="btn-ver-producto"
-                        >
+                        <a href="detalleProducto.html?id=${prod.idProducto}" class="btn-ver-producto">
                             Ver producto
                         </a>
-
                     </div>
 
-                    <button 
-                        type="button" 
-                        class="btn-quitar-fav" 
-                        data-id="${prod.idProducto}"
-                    >
+                    <button type="button" class="btn-quitar-fav" data-id="${prod.idProducto}">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 `;

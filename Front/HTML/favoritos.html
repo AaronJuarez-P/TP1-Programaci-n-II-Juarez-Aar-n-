@@ -5,13 +5,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="../CSS/main.css">
         <link rel="stylesheet" href="../CSS/favoritos.css">
+        <link rel="stylesheet" href="../CSS/carrito.css">
         <title>Lana&Lino - Productos Favoritos</title>
     </head>
+
     <body>
 
         <header>
             <p id="nombre">Lana&Lino</p>
-            
+
             <select name="categorias" class="categorias-ropa">
                 <option value="" selected disabled>Categorias</option>
                 <option value="productos">Productos</option>
@@ -25,8 +27,20 @@
         </header>
 
         <main>
-            <div class="contenedor-productos">
+
+            <div class="carrito-titulo-bloque">
+                <h1><i class="fa-solid fa-bookmark"></i> Favoritos</h1>
+                <span id="carrito-cantidad-label" class="carrito-subtitulo">0 productos</span>
             </div>
+
+            <div class="contenedor-productos" id="lista-carrito"></div>
+
+            <div id="carrito-vacio" class="sin-carrito" style="display:none;">
+                <i class="fa-solid fa-bookmark"></i>
+                <p>Sin favoritos</p>
+                <a href="main.html" class="btn-ver-producto">Ver productos</a>
+            </div>
+
         </main>
 
         <footer>
