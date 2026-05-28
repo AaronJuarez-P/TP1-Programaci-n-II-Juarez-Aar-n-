@@ -10,6 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     const btnFavoritos = document.getElementById("btn-agregar-favoritos");
 
+    // ── BOTONES DEL HEADER ──────────────────────────────────────────────────
+    const btnIrCarrito = document.getElementById("btn-ir-carrito-header");
+    const btnIrFavoritos = document.getElementById("btn-ir-favoritos-header");
+
+    if (btnIrCarrito) {
+        btnIrCarrito.addEventListener("click", () => {
+            window.location.href = "carrito.html";
+        });
+    }
+
+    if (btnIrFavoritos) {
+        btnIrFavoritos.addEventListener("click", () => {
+            window.location.href = "favoritos.html";
+        });
+    }
+
     // 1. OBTENER FAVORITOS AL CARGAR LA PÁGINA
     if (idUsuario && token) {
         fetch(`http://localhost:4000/api/obtenerFavoritos/${idUsuario}`, {
@@ -20,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.codigo === 200 && data.payload) {
                 const esFavorito = data.payload.some(fav => String(fav.idProducto) === String(idProducto));
                 if (esFavorito) {
-                    btnFavoritos.classList.add("activo"); // Usa .activo de tu CSS
+                    btnFavoritos.classList.add("activo");
                 }
             }
         })
@@ -77,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Error al cargar el producto:", error));
 
-    // 3. EVENTO: AGREGAR AL CARRITO (CON CONTROL DE STOCK MÁXIMO)
+    // 3. EVENTO: AGREGAR AL CARRITO (guarda cuotas, recargo y precio final)
     document.getElementById("btn-agregar-carrito").addEventListener("click", () => {
         if (!idInventarioSeleccionado) return;
 
@@ -91,14 +107,24 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        const precioBase = parseFloat(document.getElementById("precio-base").value);
+        const precioConRecargo = precioBase * (1 + recargoActual);
+
         if (existe) {
+            // Si el producto ya está en el carrito, solo suma cantidad
             existe.cantidad += 1;
         } else {
+            // Arma el objeto con toda la info de cuotas
             const productoCarrito = {
                 idInventario: varianteElegida.idInventario,
+                idProducto: idProducto,
                 nombre: varianteElegida.producto,
+                categoria: varianteElegida.categoria || "",
                 talle: varianteElegida.talle,
-                precio: parseFloat(document.getElementById("precio-base").value),
+                precioBase: precioBase,
+                recargo: recargoActual,
+                cuotas: cuotasActuales,
+                precioFinal: precioConRecargo,
                 imagen: varianteElegida.urlImagen || varianteElegida.ulrImagen,
                 cantidad: 1
             };
@@ -106,7 +132,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         localStorage.setItem("carrito", JSON.stringify(carrito));
-        mostrarAnuncio("¡Añadido al carrito!", "fa-cart-shopping");
+
+        // Texto del anuncio según cuotas elegidas
+        let textoAnuncio = "¡Añadido al carrito!";
+        if (cuotasActuales > 1) {
+            const valorCuota = precioConRecargo / cuotasActuales;
+            textoAnuncio = `¡Añadido! ${cuotasActuales} cuotas de ARS$ ${valorCuota.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+        mostrarAnuncio(textoAnuncio, "fa-cart-shopping");
     });
 
     // 4. EVENTO: BOTÓN DE FAVORITOS (TOGGLE + ANUNCIO VISUAL)
@@ -116,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const estaEnFavoritos = btnFavoritos.classList.contains("activo"); // Cambiado a .activo
+        const estaEnFavoritos = btnFavoritos.classList.contains("activo");
         const url = estaEnFavoritos ? "http://localhost:4000/api/eliminarFavorito" : "http://localhost:4000/api/agregarFavorito";
         const metodo = estaEnFavoritos ? "DELETE" : "POST";
 
@@ -131,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             if (data.codigo === 200) {
-                btnFavoritos.classList.toggle("activo"); // Conmuta la clase .activo de tu CSS
+                btnFavoritos.classList.toggle("activo");
                 
                 if (estaEnFavoritos) {
                     mostrarAnuncio("Eliminado de favoritos", "fa-heart-crack");
@@ -177,7 +210,7 @@ function actualizarPrecios() {
     }
 }
 
-// 6. FUNCIÓN ADAPTADA A TU CONFIGURACIÓN DE CSS (`#contenedor-notificaciones` y `.cartel-notificacion`)
+// 6. FUNCIÓN DE NOTIFICACIONES
 function mostrarAnuncio(mensaje, iconoClase = "fa-heart") {
     let contenedor = document.getElementById("contenedor-notificaciones");
     if (!contenedor) {
@@ -187,22 +220,18 @@ function mostrarAnuncio(mensaje, iconoClase = "fa-heart") {
     }
 
     const anuncio = document.createElement("div");
-    anuncio.className = "cartel-notificacion"; // Usa tu clase CSS exacta
-    
-    // Inyecta el ícono dinámico que le mandemos y el mensaje
+    anuncio.className = "cartel-notificacion";
     anuncio.innerHTML = `<i class="fa-solid ${iconoClase}"></i> <span>${mensaje}</span>`;
     contenedor.appendChild(anuncio);
 
-    // Pequeño timeout para activar el transform CSS
     setTimeout(() => {
         anuncio.classList.add("mostrar");
     }, 50);
 
-    // Desvanece y elimina el nodo tras 3 segundos
     setTimeout(() => {
         anuncio.classList.remove("mostrar");
         setTimeout(() => {
             anuncio.remove();
-        }, 350); // Tiempo justo que dura tu transición CSS (.35s)
+        }, 350);
     }, 3000);
 }

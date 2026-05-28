@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contenedor = document.querySelector(".contenedor-productos");
     const selectCategoria = document.querySelector(".categorias-ropa");
     const btnFavoritosMain = document.getElementById("boton-favoritos-main");
+    const btnCarritoMain = document.getElementById("boton-carrito-main");
     const API_URL = "http://localhost:4000/api/obtenerProductos";
     
     let todosLosProductos = []; 
@@ -9,6 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnFavoritosMain) {
         btnFavoritosMain.addEventListener("click", () => {
             window.location.href = "favoritos.html";
+        });
+    }
+
+    if (btnCarritoMain) {
+        btnCarritoMain.addEventListener("click", () => {
+            window.location.href = "carrito.html";
         });
     }
 

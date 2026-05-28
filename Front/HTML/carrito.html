@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="../CSS/main.css">
+        <link rel="stylesheet" href="../CSS/carrito.css">
+        <title>Lana&Lino - Carrito de Compras</title>
+    </head>
+    <body>
+
+        <header>
+            <p id="nombre">Lana&Lino</p>
+
+            <select name="categorias" class="categorias-ropa">
+                <option value="" selected disabled>Categorias</option>
+                <option value="productos">Productos</option>
+                <option value="remeras">Remeras</option>
+                <option value="buzos">Buzos</option>
+                <option value="camperas">Camperas</option>
+                <option value="bermudas">Bermudas</option>
+                <option value="pantalones">Pantalones</option>
+                <option value="zapatillas">Zapatillas</option>
+            </select>
+        </header>
+
+        <main>
+            <div class="carrito-titulo-bloque">
+                <h1><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</h1>
+                <span id="carrito-cantidad-label" class="carrito-subtitulo">0 productos</span>
+            </div>
+
+            <!-- Lista de productos del carrito -->
+            <div class="contenedor-productos" id="lista-carrito">
+                <!-- Los items se generan por JS -->
+            </div>
+
+            <!-- Estado vacío -->
+            <div id="carrito-vacio" class="sin-carrito" style="display:none;">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <p>Tu carrito está vacío</p>
+                <a href="main.html" class="btn-ver-producto">Ver productos</a>
+            </div>
+
+            <!-- Resumen total + botón de pago -->
+            <div class="carrito-resumen-bloque" id="carrito-resumen-bloque">
+                <div class="carrito-resumen-card">
+                    <h2 class="resumen-titulo">Resumen del pedido</h2>
+
+                    <div class="resumen-linea">
+                        <span>Subtotal</span>
+                        <span id="resumen-subtotal">ARS$ 0,00</span>
+                    </div>
+
+                    <div class="resumen-linea">
+                        <span>Envío</span>
+                        <span class="resumen-envio-gratis">Gratis</span>
+                    </div>
+
+                    <div class="resumen-divisor"></div>
+
+                    <div class="resumen-linea resumen-total-linea">
+                        <span>Total</span>
+                        <span id="resumen-total">ARS$ 0,00</span>
+                    </div>
+
+                    <p class="resumen-nota">* El total incluye los recargos por financiación seleccionados en cada producto.</p>
+
+                    <button type="button" id="btn-confirmar-pedido" class="btn-pagar" disabled>
+                        <i class="fa-solid fa-lock"></i> Proceder al pago
+                    </button>
+
+                    <a href="main.html" class="btn-seguir-comprando">
+                        <i class="fa-solid fa-arrow-left"></i> Seguir comprando
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Email: contacto@lanaylino.com</p>
+            <p>Tel: +54 342 764 6657</p>
+            <p>WSP: +54 342 563 6628</p>
+            <a href="#">Instagram</a><br>
+            <a href="#">TikTok</a><br>
+            <a href="#">FaceBook</a><br>
+            <p>Desarrollado por: Aarón Juarez</p><br>
+            <p>© 2026 Lana&Lino - Todos los derechos reservados</p>
+        </footer>
+
+        <div id="contenedor-notificaciones"></div>
+
+        <script src="../JS/carrito.js"></script>
+    </body>
+</html>
