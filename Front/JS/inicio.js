@@ -24,6 +24,7 @@ formInicio.addEventListener("submit", async (e) => {
         if (data.codigo === 200) {
             console.log("Ingreso exitoso. Se encontró el usuario.");
             localStorage.setItem("token", data.jwt);
+            localStorage.setItem("idUsuario", data.payload[0].id_usuario);
             
             alert("Bienvenido/a");
             

@@ -26,7 +26,7 @@
                 <div class="detalle-grupo">
                     <span class="detalle-subtitulo">Talles Disponibles</span>
                     <div id="contenedor-talles" class="detalle-lista-botones">
-                        </div>
+                    </div>
                 </div>
 
                 <div class="detalle-grupo">
@@ -47,12 +47,19 @@
                     <div id="precio-por-cuota" class="monto-subdesglose">Selecciona un método de pago</div>
                 </div>
 
-                <button type="button" id="btn-agregar-carrito" class="btn-principal-carrito" disabled>
-                    <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
-                </button>
+                <div class="botones-producto">
+                    <button type="button" id="btn-agregar-carrito" class="btn-principal-carrito" disabled>
+                        <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+                    </button>
+                    <button type="button" id="btn-agregar-favoritos" class="btn-principal-favoritos">
+                        <i class="fa-solid fa-bookmark"></i>
+                    </button>
+                </div>
             </div>
 
         </main>
+
+        <div id="contenedor-notificaciones"></div>
 
         <script src="../JS/detalleProducto.js"></script>
     </body>

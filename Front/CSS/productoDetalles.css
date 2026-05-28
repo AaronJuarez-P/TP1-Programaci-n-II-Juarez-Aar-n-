@@ -24,9 +24,10 @@
 }
 
 .detalle-bloque-imagen img {
-    max-width: 100%;
-    max-height: 500px;
-    object-fit: contain;
+    width: 100%;             /* Fuerza a la imagen a ocupar todo el ancho disponible */
+    height: 100%;            /* Fuerza a la imagen a ocupar todo el alto disponible */
+    max-height: 500px;       /* Mantiene el límite máximo */
+    object-fit: cover;       /* Hace que llene el recuadro elegantemente sin deformarse */
     border-radius: 12px;
     box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
 }
@@ -156,17 +157,26 @@
     margin-top: 4px;
 }
 
+/* ================= CONTENEDOR DE BOTONES DE ACCIÓN ================= */
+
+.botones-producto {
+    display: flex;
+    gap: 15px;                 /* Separación prolija entre el carrito y favoritos */
+    width: 100%;
+    margin-top: auto;          /* Lo empuja siempre al fondo de la columna derecha */
+}
+
 /* Botón Añadir al Carrito */
 .btn-principal-carrito {
-    width: 100%;
+    flex: 1;                   /* Se estira ocupando el espacio restante de la fila */
     padding: 16px;
     font-size: 16px;
     font-weight: 600;
     border-radius: 14px;
     background-color: #4b5b66;
     color: #ffffff;
-    margin-top: auto; /* Lo empuja siempre al fondo de la columna */
     box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease;
 }
 
 .btn-principal-carrito:hover:not(:disabled) {
@@ -182,8 +192,72 @@
 }
 
 .btn-principal-carrito i {
-    color: inherit; /* Hereda el color blanco o gris del texto del botón */
+    color: inherit; 
     margin-right: 6px;
+}
+
+/* Botón Añadir a Favoritos (Nuevo) */
+.btn-principal-favoritos {
+    width: 55px;               /* Ancho fijo para que quede cuadrado */
+    height: 55px;              /* Misma altura proporcional al botón del carrito */
+    font-size: 18px;
+    border-radius: 14px;       /* Mismo redondeado para mantener simetría */
+    background-color: #bccbd4; /* Tono grisáceo combinado con tus selectores */
+    color: #2c3338;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-principal-favoritos:hover {
+    background-color: #4b5b66;
+    color: #ffffff;
+}
+
+/* Clase de estado activo (Para cuando el producto ya esté guardado) */
+.btn-principal-favoritos.activo {
+    background-color: #e63946;
+    color: #ffffff;
+}
+
+/* ================= COMPONENTE DE NOTIFICACIÓN FLOTANTE (TOAST) ================= */
+
+#contenedor-notificaciones {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cartel-notificacion {
+    background-color: #2c3338;
+    color: #ffffff;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.18);
+    transform: translateX(120%);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.cartel-notificacion.mostrar {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.cartel-notificacion i {
+    font-size: 16px;
+    color: #cfd9e0;
 }
 
 /* ================= RESPONSIVE DETALLE ================= */
@@ -197,13 +271,26 @@
     .detalle-bloque-imagen img {
         max-height: 350px;
     }
+    #contenedor-notificaciones {
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        align-items: center;
+    }
+    .cartel-notificacion {
+        transform: translateY(120%);
+        width: 100%;
+        max-width: 400px;
+        justify-content: center;
+    }
+    .cartel-notificacion.mostrar {
+        transform: translateY(0);
+    }
 }
 
-.detalle-bloque-imagen img {
-    width: 100%;             /* 👈 Fuerza a la imagen a ocupar todo el ancho disponible */
-    height: 100%;            /* 👈 Fuerza a la imagen a ocupar todo el alto disponible */
-    max-height: 500px;       /* Mantiene el límite máximo que ya tenías */
-    object-fit: cover;       /* 👈 Hace que llene el recuadro elegantemente sin deformarse */
-    border-radius: 12px;
-    box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
+@media(max-width: 480px){
+    .botones-producto {
+        gap: 10px;
+    }
 }
