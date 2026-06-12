@@ -88,3 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+let btnInicioMain = document.getElementById("boton-inicio-main");
+
+btnInicioMain.addEventListener("click", () => window.location.href = "inicio.html")

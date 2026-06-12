@@ -12,11 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // ================= VALIDAR SESION =================
     if (!idUsuario || !token) {
 
-        contenedor.innerHTML = "";
-        carritoVacio.style.display = "flex";
+    contenedor.innerHTML = "";
+    carritoVacio.style.display = "flex";
 
-        return;
-    }
+    actualizarLabelCantidadFavoritos(0);
+
+    return;
+}
 
     // ================= OBTENER FAVORITOS =================
     fetch(`http://localhost:4000/api/obtenerFavoritos/${idUsuario}`, {
@@ -35,15 +37,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // ================= SIN FAVORITOS =================
         if (data.codigo !== 200 || !data.payload || data.payload.length === 0) {
 
-            contenedor.innerHTML = "";
-            carritoVacio.style.display = "flex";
+    contenedor.innerHTML = "";
+    carritoVacio.style.display = "flex";
 
-            return;
-        }
+    actualizarLabelCantidadFavoritos(0);
+
+    return;
+}
 
         // ================= CON FAVORITOS =================
         contenedor.innerHTML = "";
-        carritoVacio.style.display = "none";
+carritoVacio.style.display = "none";
+
+actualizarLabelCantidadFavoritos(data.payload.length);
 
         data.payload.forEach(fav => {
 
@@ -113,15 +119,19 @@ document.addEventListener("DOMContentLoaded", () => {
                                 tarjeta.remove();
 
                                 productosFavoritos = productosFavoritos.filter(
-                                    p => p.idProducto != idEliminar
-                                );
+    p => p.idProducto != idEliminar
+);
+
+actualizarLabelCantidadFavoritos(productosFavoritos.length);
 
                                 // ================= SI NO QUEDAN FAVORITOS =================
                                 if (contenedor.children.length === 0) {
 
-                                    contenedor.innerHTML = "";
-                                    carritoVacio.style.display = "flex";
-                                }
+    contenedor.innerHTML = "";
+    carritoVacio.style.display = "flex";
+
+    actualizarLabelCantidadFavoritos(0);
+}
                             }
                         })
                         .catch(err => console.error(err));
@@ -162,35 +172,89 @@ document.addEventListener("DOMContentLoaded", () => {
 
             filtrados.forEach(prod => {
 
-                const tarjeta = document.createElement("div");
-                tarjeta.className = "card-producto";
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "card-producto";
 
-                tarjeta.innerHTML = `
-                    <img src="${prod.urlImagen || prod.ulrImagen}" alt="${prod.producto}">
+    tarjeta.innerHTML = `
+        <img src="${prod.urlImagen || prod.ulrImagen}" alt="${prod.producto}">
 
-                    <div class="info-producto">
-                        <h4>${prod.producto}</h4>
+        <div class="info-producto">
+            <h4>${prod.producto}</h4>
 
-                        <p class="precio-producto">
-                            ARS$ ${parseFloat(prod.precio).toLocaleString('es-AR', {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2
-                            })}
-                        </p>
+            <p class="precio-producto">
+                ARS$ ${parseFloat(prod.precio).toLocaleString('es-AR', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}
+            </p>
 
-                        <a href="detalleProducto.html?id=${prod.idProducto}" class="btn-ver-producto">
-                            Ver producto
-                        </a>
-                    </div>
+            <a href="detalleProducto.html?id=${prod.idProducto}" class="btn-ver-producto">
+                Ver producto
+            </a>
+        </div>
 
-                    <button type="button" class="btn-quitar-fav" data-id="${prod.idProducto}">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                `;
+        <button type="button" class="btn-quitar-fav" data-id="${prod.idProducto}">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    `;
 
-                contenedor.appendChild(tarjeta);
-            });
+    tarjeta.querySelector(".btn-quitar-fav")
+    .addEventListener("click", (e) => {
+
+        const idEliminar = e.currentTarget.getAttribute("data-id");
+
+        fetch("http://localhost:4000/api/eliminarFavorito", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: JSON.stringify({
+                id_usuario: idUsuario,
+                id_producto: idEliminar
+            })
+        })
+        .then(res => res.json())
+        .then(dataDelete => {
+
+            if (dataDelete.codigo === 200) {
+
+                tarjeta.remove();
+
+                productosFavoritos = productosFavoritos.filter(
+                    p => p.idProducto != idEliminar
+                );
+
+                actualizarLabelCantidadFavoritos(productosFavoritos.length);
+
+                if (contenedor.children.length === 0) {
+
+                    contenedor.innerHTML = "";
+                    carritoVacio.style.display = "flex";
+
+                    actualizarLabelCantidadFavoritos(0);
+                }
+            }
+        })
+        .catch(err => console.error(err));
+
+    });
+
+    contenedor.appendChild(tarjeta);
+});
         });
     }
 
 });
+
+function actualizarLabelCantidadFavoritos(total) {
+
+    const label = document.getElementById("carrito-cantidad-label");
+
+    if (!label) return;
+
+    label.innerText = total === 1
+        ? "1 producto"
+        : `${total} productos`;
+}
+
