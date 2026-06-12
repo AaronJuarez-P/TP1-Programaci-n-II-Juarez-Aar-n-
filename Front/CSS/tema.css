@@ -1,0 +1,33 @@
+/* =====================================================
+   MODO OSCURO - LANA&LINO
+   Aplica una inversin de colores global controlada,
+   manteniendo las imgenes e iconos con su color original.
+   ===================================================== */
+
+html.modo-oscuro{
+    filter: invert(1) hue-rotate(180deg);
+
+    background-color: #ffffff;
+}
+
+/* Las imgenes, videos e iconos vuelven a invertirse
+   para conservar sus colores originales */
+html.modo-oscuro img,
+html.modo-oscuro video,
+html.modo-oscuro picture,
+html.modo-oscuro i{
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Transicin suave al cambiar de tema */
+html{
+    transition: filter 0.25s ease, background-color 0.25s ease;
+}
+
+/* =====================================================
+   BOTON MODO OSCURO
+   ===================================================== */
+
+#boton-modo-oscuro i{
+    transition: 0.2s ease;
+}
