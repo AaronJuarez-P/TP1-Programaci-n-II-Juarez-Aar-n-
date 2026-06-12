@@ -45,3 +45,22 @@ formInicio.addEventListener("submit", async (e) => {
 btnRegistroInicio.addEventListener("click", () => {
     window.location.href = "registro.html";
 });
+
+// =====================================================
+// MOSTRAR/OCULTAR CONTRASENA
+// =====================================================
+document.querySelectorAll(".password-container button").forEach((boton) => {
+    boton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const contenedor = boton.closest(".password-container");
+        const input = contenedor.querySelector("input");
+        const icono = boton.querySelector("i");
+
+        const esPassword = input.getAttribute("type") === "password";
+        input.setAttribute("type", esPassword ? "text" : "password");
+
+        icono.classList.toggle("fa-eye");
+        icono.classList.toggle("fa-eye-slash");
+    });
+});

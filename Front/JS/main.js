@@ -3,9 +3,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectCategoria = document.querySelector(".categorias-ropa");
     const btnFavoritosMain = document.getElementById("boton-favoritos-main");
     const btnCarritoMain = document.getElementById("boton-carrito-main");
+    const btnInicioMain = document.getElementById("boton-inicio-main");
+    const btnCerrarSesionMain = document.getElementById("boton-cerrar-sesion-main");
+    const btnPerfilMain = document.getElementById("boton-perfil-main");
     const API_URL = "http://localhost:4000/api/obtenerProductos";
     
     let todosLosProductos = []; 
+
+    const idUsuario = localStorage.getItem("idUsuario");
+    const token = localStorage.getItem("token");
+    const haySesion = !!(idUsuario && token);
+
+    // ================= MOSTRAR/OCULTAR BOTONES SEGUN SESION =================
+    if (btnInicioMain) {
+        btnInicioMain.style.display = haySesion ? "none" : "inline-flex";
+        btnInicioMain.addEventListener("click", () => {
+            window.location.href = "inicio.html";
+        });
+    }
+
+    if (btnCerrarSesionMain) {
+        btnCerrarSesionMain.style.display = haySesion ? "inline-flex" : "none";
+        btnCerrarSesionMain.addEventListener("click", () => {
+            mostrarConfirmacionCerrarSesion();
+        });
+    }
+
+    if (btnPerfilMain) {
+        btnPerfilMain.style.display = haySesion ? "inline-flex" : "none";
+        btnPerfilMain.addEventListener("click", () => {
+            window.location.href = "usuario.html";
+        });
+    }
 
     if (btnFavoritosMain) {
         btnFavoritosMain.addEventListener("click", () => {
@@ -64,18 +93,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (selectCategoria) {
-        selectCategoria.addEventListener("change", (evento) => {
-            const categoriaSeleccionada = evento.target.value; 
+        selectCategoria.addEventListener("change", () => {
+            aplicarFiltros();
+        });
+    }
 
-            if (categoriaSeleccionada === "productos" || categoriaSeleccionada === "") {
-                mostrarProductos(todosLosProductos);
-            } else {
-                const productosFiltrados = todosLosProductos.filter(prod => 
-                    prod.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase()
-                );
-                mostrarProductos(productosFiltrados);
+    const inputBusqueda = document.querySelector('.barraBusqueda input[name="busqueda"]');
+    const btnBusqueda = document.querySelector(".btn-busqueda");
+
+    if (btnBusqueda) {
+        btnBusqueda.addEventListener("click", (e) => {
+            e.preventDefault();
+            aplicarFiltros();
+        });
+    }
+
+    if (inputBusqueda) {
+        inputBusqueda.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                aplicarFiltros();
             }
         });
+    }
+
+    function aplicarFiltros() {
+        let productosFiltrados = todosLosProductos;
+
+        // ================= FILTRO POR CATEGORIA =================
+        const categoriaSeleccionada = selectCategoria ? selectCategoria.value : "";
+        if (categoriaSeleccionada && categoriaSeleccionada !== "productos") {
+            productosFiltrados = productosFiltrados.filter(prod =>
+                prod.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase()
+            );
+        }
+
+        // ================= FILTRO POR BUSQUEDA =================
+        const textoBusqueda = inputBusqueda
+            ? inputBusqueda.value.trim().toLowerCase()
+            : "";
+
+        if (textoBusqueda !== "") {
+            productosFiltrados = productosFiltrados.filter(prod =>
+                prod.producto.trim().toLowerCase().substring(0).includes(textoBusqueda)
+            );
+        }
+
+        mostrarProductos(productosFiltrados);
     }
 
     contenedor.addEventListener("click", (evento) => {
@@ -89,6 +153,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-let btnInicioMain = document.getElementById("boton-inicio-main");
+// -----------------------------------------------
+// MODAL DE CONFIRMACION PARA CERRAR SESION
+// -----------------------------------------------
+function mostrarConfirmacionCerrarSesion() {
+    // Evitar duplicados
+    const existente = document.getElementById("overlay-cerrar-sesion");
+    if (existente) existente.remove();
 
-btnInicioMain.addEventListener("click", () => window.location.href = "inicio.html")
+    const overlay = document.createElement("div");
+    overlay.id = "overlay-cerrar-sesion";
+    overlay.className = "overlay-modal";
+
+    overlay.innerHTML = `
+        <div class="modal-confirmacion">
+            <i class="fa-solid fa-circle-exclamation modal-icono"></i>
+            <h3>Cerrar sesin</h3>
+            <p>Si confirms, volvers a la pantalla principal sin los privilegios de un usuario registrado (no podrs acceder al carrito, favoritos ni a tu perfil).</p>
+            <div class="modal-botones">
+                <button type="button" id="btn-cancelar-cierre" class="modal-btn-cancelar">Cancelar</button>
+                <button type="button" id="btn-confirmar-cierre" class="modal-btn-confirmar">Confirmar</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => overlay.classList.add("activo"));
+
+    const cerrarModal = () => {
+        overlay.classList.remove("activo");
+        setTimeout(() => overlay.remove(), 200);
+    };
+
+    document.getElementById("btn-cancelar-cierre").addEventListener("click", () => {
+        cerrarModal();
+        window.location.href = "main.html";
+    });
+
+    document.getElementById("btn-confirmar-cierre").addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("idUsuario");
+        cerrarModal();
+        window.location.href = "main.html";
+    });
+
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+            cerrarModal();
+            window.location.href = "main.html";
+        }
+    });
+}

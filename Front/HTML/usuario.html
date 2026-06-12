@@ -3,32 +3,44 @@
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="../CSS/main.css">
-        <link rel="stylesheet" href="../CSS/formRegistro.css">
-        <link rel="stylesheet" href="../CSS/nombreEmpresaInicio.css">
-        <title>Lana&Lino-Perfil</title>
+        <link rel="stylesheet" href="../CSS/tema.css">
+        <script src="../JS/tema.js"></script>
+        <meta charset="utf-8" lang="es">
+        <title>Lana&Lino - Mi Perfil</title>
     </head>
     <body>
         <header>
             <p id="nombre">Lana&Lino</p>
+            <div class="derecha">
+                <button type="button" id="boton-volver-perfil"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+            </div>
         </header>
+
         <main>
-            <form class="registro-formulario">
+            <form class="registro-formulario" id="formPerfil">
+                <h2 class="titulo-perfil">Mis datos</h2>
+
                 <label>
-                    <input type="text" placeholder="Nombre">
-                    <button class="boton-lapiz" type="button"><i class="fa-solid fa-pen"></i></button>
+                    <input type="email" id="email" placeholder="Correo" disabled>
                 </label>
+
                 <label>
-                    <input type="text" placeholder="Apellido">
-                    <button class="boton-lapiz" type="button"><i class="fa-solid fa-pen"></i></button>
+                    <input type="text" name="nombre" id="nombre-input" placeholder="Nombre" required>
                 </label>
+
                 <label>
-                    <input type="text" placeholder="Dirección">
-                    <button class="boton-lapiz" type="button"><i class="fa-solid fa-pen"></i></button>
+                    <input type="text" name="apellido" id="apellido-input" placeholder="Apellido" required>
                 </label>
+
                 <label>
-                    <input type="tel" placeholder="Telefono">
-                    <button class="boton-lapiz" type="button"><i class="fa-solid fa-pen"></i></button>
+                    <input type="tel" name="telefono" id="telefono-input" placeholder="Telfono" required>
                 </label>
+
+                <label>
+                    <input type="text" name="direccion" id="direccion-input" placeholder="Direccin" required>
+                </label>
+
+                <button type="submit" class="btn-guardar-perfil">Guardar cambios</button>
             </form>
         </main>
 
@@ -39,8 +51,12 @@
             <a href="#">Instagram</a><br>
             <a href="#">TikTok</a><br>
             <a href="#">FaceBook</a><br>
-            <p>Desarrollado por: Aarón Juarez</p><br>
-            <p>© 2026 Lana&Lino - Todos los derechos reservados</p>
+            <p>Desarrollado por: Aarn Juarez</p><br>
+            <p> 2026 Lana&Lino - Todos los derechos reservados</p>
         </footer>
+
+        <div id="contenedor-notificaciones"></div>
+
+        <script src="../JS/usuario.js"></script>
     </body>
 </html>

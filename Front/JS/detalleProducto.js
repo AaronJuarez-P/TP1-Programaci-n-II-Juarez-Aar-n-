@@ -95,6 +95,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. EVENTO: AGREGAR AL CARRITO (guarda cuotas, recargo y precio final)
     document.getElementById("btn-agregar-carrito").addEventListener("click", () => {
+        if (!idUsuario || !token) {
+            mostrarAnuncio("Inicia sesin para agregar productos al carrito", "fa-circle-exclamation");
+            return;
+        }
+
         if (!idInventarioSeleccionado) return;
 
         const varianteElegida = variantesProducto.find(v => v.idInventario === idInventarioSeleccionado);
