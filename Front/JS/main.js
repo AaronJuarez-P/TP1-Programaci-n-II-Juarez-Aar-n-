@@ -169,7 +169,7 @@ function mostrarConfirmacionCerrarSesion() {
         <div class="modal-confirmacion">
             <i class="fa-solid fa-circle-exclamation modal-icono"></i>
             <h3>Cerrar sesin</h3>
-            <p>Si confirms, volvers a la pantalla principal sin los privilegios de un usuario registrado (no podrs acceder al carrito, favoritos ni a tu perfil).</p>
+            <p>Si confirmas, volveras a la pantalla principal sin los privilegios de un usuario registrado (no podras acceder al carrito, favoritos, ni a tu perfil).</p>
             <div class="modal-botones">
                 <button type="button" id="btn-cancelar-cierre" class="modal-btn-cancelar">Cancelar</button>
                 <button type="button" id="btn-confirmar-cierre" class="modal-btn-confirmar">Confirmar</button>
