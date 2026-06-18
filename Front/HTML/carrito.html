@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Carga biblioteca de fuentes en la pagina-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="../CSS/main.css">
         <link rel="stylesheet" href="../CSS/carrito.css">
@@ -15,6 +16,7 @@
         <header>
             <p id="nombre">Lana&Lino</p>
 
+            <!--Categorias de producto en encabezado de carrito-->
             <select name="categorias" class="categorias-ropa">
                 <option value="" selected disabled>Categorias</option>
                 <option value="productos">Productos</option>
@@ -29,6 +31,7 @@
 
         <main>
             <div class="carrito-titulo-bloque">
+                <!--Mensaje para la cantidad de productos en el carrito-->
                 <h1><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</h1>
                 <span id="carrito-cantidad-label" class="carrito-subtitulo">0 productos</span>
             </div>
@@ -36,7 +39,7 @@
             <div class="contenedor-productos" id="lista-carrito">
 
             </div>
-
+            <!--Texto visible en caso de no tener productos en el carrito-->
             <div id="carrito-vacio" class="sin-carrito" style="display:none;">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <p>Tu carrito está vacío</p>
@@ -48,11 +51,13 @@
                     <h2 class="resumen-titulo">Resumen del pedido</h2>
 
                     <div class="resumen-linea">
+                        <!--Total de las prendas-->
                         <span>Subtotal</span>
                         <span id="resumen-subtotal">ARS$ 0,00</span>
                     </div>
 
                     <div class="resumen-linea">
+                        <!--Precio envio-->
                         <span>Envío</span>
                         <span class="resumen-envio-gratis">Gratis</span>
                     </div>
@@ -60,12 +65,14 @@
                     <div class="resumen-divisor"></div>
 
                     <div class="resumen-linea resumen-total-linea">
+                        <!--Precio total-->
                         <span>Total</span>
                         <span id="resumen-total">ARS$ 0,00</span>
                     </div>
 
                     <p class="resumen-nota">* El total incluye los recargos por financiación seleccionados en cada producto.</p>
 
+                    <!--Simular pago-->
                     <button type="button" id="btn-confirmar-pedido" class="btn-pagar" disabled>
                         <i class="fa-solid fa-lock"></i> Proceder al pago
                     </button>

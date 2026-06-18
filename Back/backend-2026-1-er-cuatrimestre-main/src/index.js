@@ -10,7 +10,7 @@ const main = () => {
 
 main();
 
-// Esto ejecuta tu función apenas arranca el backend para verificar que la BD responda
+// Esto ejecuta la función apenas arranca el backend para verificar que la BD responda
 methods.fetchProductos()
     .then(products => {
         console.log('✅ Conexión con Base de Datos exitosa. Productos cargados:', products.length);

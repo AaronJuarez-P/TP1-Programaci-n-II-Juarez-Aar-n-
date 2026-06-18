@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <!--Carga una carpeta de fuentes en la pagina-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="../CSS/main.css">
         <link rel="stylesheet" href="../CSS/productoDetalles.css">
@@ -12,6 +13,7 @@
     <body>
 
         <header>
+            <!--Encabezado con nombre, boton hacia el carrito, favoritos y la pantalla anterior-->
             <p id="nombre">Lana&Lino</p>
             <div class="derecha">
                 <button type="button" id="btn-ir-carrito-header">
@@ -27,12 +29,13 @@
         </header>
 
         <main class="detalle-producto-seccion">
-            
+            <!--Imagen del producto + texto alternativo-->
             <div class="detalle-bloque-imagen">
                 <img id="producto-imagen" src="" alt="Cargando producto...">
             </div>
 
             <div class="detalle-bloque-info">
+                <!--Textos cambiantes al cargar el producto-->
                 <h1 id="producto-nombre">Cargando Nombre...</h1>
                 <p id="producto-descripcion">Cargando Descripción...</p>
                 
@@ -51,6 +54,7 @@
                     <input type="hidden" id="precio-base" value="0">
                     
                     <div class="detalle-lista-cuotas">
+                        <!--Lista de botones con las distintas cuotas y cambios de precio-->
                         <button type="button" class="btn-cuota-opcion activo" onclick="seleccionarCuota(this, 1, 0)">Contado</button>
                         <button type="button" class="btn-cuota-opcion" onclick="seleccionarCuota(this, 3, 0.05)">3 Cuotas (+5%)</button>
                         <button type="button" class="btn-cuota-opcion" onclick="seleccionarCuota(this, 6, 0.10)">6 Cuotas (+10%)</button>
@@ -60,6 +64,7 @@
                 </div>
 
                 <div class="detalle-tarjeta-precio">
+                    <!--Texto cambia al precio del producto-->
                     <div id="precio-final" class="monto-principal">ARS$ 0,00</div>
                     <div id="precio-por-cuota" class="monto-subdesglose">Selecciona un método de pago</div>
                 </div>

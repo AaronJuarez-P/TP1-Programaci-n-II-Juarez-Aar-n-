@@ -1,30 +1,35 @@
-// ================= CARRITO.JS =================
-
+//Se dispara al haber terminado de cargar todo el HTML
 document.addEventListener("DOMContentLoaded", () => {
 
+    //Trae el primer elemento que coincida con la clase
     const selectCategoria = document.querySelector(".categorias-ropa");
 
-    // Estado local para filtrar sin perder los datos
+    // Trae todos los elementos del carrito
     let todosLosItems = obtenerCarrito();
 
     renderizarCarrito(todosLosItems);
 
-    // ── FILTRO POR CATEGORÍA ────────────────────────────────────────────────
     if (selectCategoria) {
+        //Al cambiar el valor de categoria se dispara el evento
         selectCategoria.addEventListener("change", (e) => {
+            //Variable que almacena el valor del elemento que disparo el evento
             const categoria = e.target.value;
 
+            //Se almacena el resultado de la condicion, si categoria es igual a productos o igual a vacio
             const filtrados = (categoria === "productos" || categoria === "")
+            //Si el resultado es igual a productos o vacio no pasa nada, si es igual a otro valor filtra
                 ? todosLosItems
+                //Recorre todos los items de un array hasta los que cumplen con la categoria
                 : todosLosItems.filter(item =>
                     (item.categoria || "").toLowerCase() === categoria.toLowerCase()
                 );
 
+                //Muestra los productos del carrito con la respuesta de la variable filtrados
             renderizarCarrito(filtrados, true);
         });
     }
 
-    // ── BOTÓN CONFIRMAR PEDIDO ──────────────────────────────────────────────
+    //Al apretar el boton se dispara el evento que muestra un mensaje en un cartel
     const btnConfirmar = document.getElementById("btn-confirmar-pedido");
     if (btnConfirmar) {
         btnConfirmar.addEventListener("click", () => {
@@ -33,9 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// -----------------------------------------------
-// RENDERIZAR ITEMS DEL CARRITO
-// -----------------------------------------------
+//
 function renderizarCarrito(items, esFiltrado = false) {
     const lista = document.getElementById("lista-carrito");
     const carritoVacio = document.getElementById("carrito-vacio");

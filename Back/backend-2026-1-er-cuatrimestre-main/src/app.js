@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import path from "path"; // <-- 1. IMPORTA EL MÓDULO PATH AQUÍ
+import path from "path";
 
 import usuarioRoutes from "./routes/usuario.routes.js";
 import loginRoutes from "./routes/login.routes.js";

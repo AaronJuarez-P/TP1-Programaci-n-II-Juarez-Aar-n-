@@ -5,14 +5,14 @@
     max-width: 1150px;
     margin: 40px auto;
     padding: 30px;
-    background-color: #cfd9e0; /* El color de tus tarjetas */
+    background-color: #cfd9e0;
     border: 1px solid #b4c1ca;
-    border-radius: 20px;       /* El redondeado de tus formularios */
+    border-radius: 20px;
     box-shadow: 0px 16px 38px rgba(0,0,0,0.12);
     gap: 45px;
 }
 
-/* Columna Izquierda */
+/* ================= LADO IZQUIERDO ================= */
 .detalle-bloque-imagen {
     flex: 1;
     display: flex;
@@ -24,15 +24,15 @@
 }
 
 .detalle-bloque-imagen img {
-    width: 100%;             /* Fuerza a la imagen a ocupar todo el ancho disponible */
-    height: 100%;            /* Fuerza a la imagen a ocupar todo el alto disponible */
-    max-height: 500px;       /* Mantiene el límite máximo */
-    object-fit: cover;       /* Hace que llene el recuadro elegantemente sin deformarse */
+    width: 100%; 
+    height: 100%;     
+    max-height: 500px;    
+    object-fit: cover;
     border-radius: 12px;
     box-shadow: 0px 4px 14px rgba(0,0,0,0.08);
 }
 
-/* Columna Derecha */
+/* ================= LADO DERECHO ================= */
 .detalle-bloque-info {
     flex: 1;
     display: flex;
@@ -52,7 +52,7 @@
     line-height: 1.6;
 }
 
-/* Bloque Informativo de Stock */
+/* ================= BLOQUE DE STOCK ================= */
 .detalle-stock-aviso {
     background-color: #bccbd4;
     padding: 12px 16px;
@@ -69,7 +69,7 @@
     color: #4b5b66;
 }
 
-/* Estructura Interna de Selectores */
+/* ================= SELECTORES ================= */
 .detalle-grupo {
     display: flex;
     flex-direction: column;
@@ -91,7 +91,7 @@
     gap: 10px;
 }
 
-/* Sobrescribir botones específicos de Talle para diferenciarlos del estilo general */
+/* ================= DIFERENCIAR ESTILO DE BOTON SELECCIONADO ================= */
 .btn-talle {
     min-width: 50px;
     height: 42px;
@@ -121,7 +121,7 @@
     box-shadow: none;
 }
 
-/* Botones de cuotas */
+/* ================= BOTONES DE CUOTAS ================= */
 .btn-cuota-opcion {
     padding: 10px 14px;
     font-size: 13px;
@@ -136,7 +136,7 @@
     color: #ffffff;
 }
 
-/* Precios */
+/* ================= PRECIOS ================= */
 .detalle-tarjeta-precio {
     background-color: #dde5ea;
     padding: 20px;
@@ -166,7 +166,7 @@
     margin-top: auto;          /* Lo empuja siempre al fondo de la columna derecha */
 }
 
-/* Botón Añadir al Carrito */
+/* ================= BOTON CARRITO PRINCIPAL ================= */
 .btn-principal-carrito {
     flex: 1;                   /* Se estira ocupando el espacio restante de la fila */
     padding: 16px;
@@ -196,7 +196,7 @@
     margin-right: 6px;
 }
 
-/* Botón Añadir a Favoritos (Nuevo) */
+/* ================= BOTON AÑADIR FAVORITOS ================= */
 .btn-principal-favoritos {
     width: 55px;               /* Ancho fijo para que quede cuadrado */
     height: 55px;              /* Misma altura proporcional al botón del carrito */
@@ -216,7 +216,7 @@
     color: #ffffff;
 }
 
-/* Clase de estado activo (Para cuando el producto ya esté guardado) */
+/* ================= BOTON PARA BOTON FAVORITOS ACTIVO ================= */
 .btn-principal-favoritos.activo {
     background-color: #e63946;
     color: #ffffff;
